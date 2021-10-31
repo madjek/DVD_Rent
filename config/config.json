@@ -1,0 +1,31 @@
+{
+  "development": {
+    "database": {
+      "url": "mongodb://localhost/mongoose_dev",
+      "options": {
+        "useNewUrlParser": true
+      }
+    }
+  },
+  "test": {
+    "database": {
+      "url": "mongodb://localhost/mongoose_test",
+      "options": {
+        "useNewUrlParser": true
+      }
+    }
+  },
+  "production": {
+    "database": {
+      "protocol": "mongodb",
+      "username": "Eugene",
+      "password": "1Jekyna2",
+      "name": "dvd_rent",
+      "host": "192.168.1.138",
+      "port": "27017",
+      "options": {
+        "useNewUrlParser": true
+      }
+    }
+  }
+}
