@@ -4,7 +4,7 @@ module.exports = function(app) {
 
 	// todoList Routes
 	app.route('/profile')
-		.post(userHandlers.loginRequired, userHandlers.profile);
+		.get(userHandlers.loginRequired, userHandlers.profile);
 
 
 	app.route('/auth/register')

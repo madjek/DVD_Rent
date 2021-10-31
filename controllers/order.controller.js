@@ -8,16 +8,15 @@ const OrderController = {}; //Create the object controller
 // Create and Save a new Order
 OrderController.create = (req, res) => {
   // Validate request
-  if (!req.body.type) {
-    res.status(400).send({ message: "Content can not be empty!" });
-    return;
-  }
+  // if (!req.body.type) {
+  //   res.status(400).send({ message: "Content can not be empty!" });
+  //   return;
+  // }
 
   // Create a Order
-  const order = new Order({
-    type: req.body.type,
-    age: req.body.age
-  });
+  const order = new Order(
+    {user_id, movie_id} = req.body,
+  );
 
   // Save order in the database
   order
@@ -31,6 +30,8 @@ OrderController.create = (req, res) => {
           err.message || "Some error occurred while creating the Order."
       });
     });
+
+    router.put("/`${this.movie_id}`", movies.update);
 };
 
 

@@ -10,7 +10,7 @@ const OrderRouter = require('./routes/order.routes');
 
 //Rutas
 router.use('/movies',auth, MovieRouter);
-router.use('/users', UserRouter);
+router.use('/users',auth, UserRouter);
 router.use('/orders', OrderRouter);
 
 module.exports = router;

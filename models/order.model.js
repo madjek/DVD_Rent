@@ -3,13 +3,18 @@ module.exports = mongoose => {
       "orders",
       mongoose.Schema(
         {
-          user_id: Number,
-          movie_id: Number,
-          date: Date
+          user_id: String,
+          movie_id: String,
+          order_date: {
+            type: Date,
+            default: Date.now
+          },
+          expiry_date: {
+            type: Date,
+            default: +new Date() + 7*24*60*60*1000}
         },
-        { timestamps: true }
       )
     );
-  
+    
     return Order;
   };

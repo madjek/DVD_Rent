@@ -9,6 +9,6 @@ db.url = dbConfig.url;
 
 db.movies = require("./movie.model.js")(mongoose);
 db.orders = require("./order.model.js")(mongoose);
-db.user = require("./user.model");
+db.users = require("./user.model");
 
 module.exports = db;

@@ -41,6 +41,9 @@ db.mongoose
     process.exit();
   });
   
-  app.use(function(req, res) {
-    res.status(404).send({ url: req.originalUrl + ' not found' })
-  });
+  // app.use(function(req, res) {
+  //   res.status(404).send({ url: req.originalUrl + ' not found' })
+  // });
+
+  var routes = require('./routes/user.routes');
+  routes(app);
