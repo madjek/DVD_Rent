@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(cors(corsOptions)); //Add CORS Middleware
 
 //Rutas
-app.get('/', (req, res) => {res.send('Bienvenidos a Express');});
+app.get('/', (req, res) => {res.send('Connection to the server successfully');});
 app.use(router);
 
 db.mongoose
