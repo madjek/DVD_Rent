@@ -4,7 +4,6 @@ const morgan = require('morgan');
 const logger = require('./config/winston');
 const cors = require("cors"); // Import cors module
 const db = require("./models");
-const Role = db.role;
 const router = require('./router.js');
 
 
@@ -41,32 +40,7 @@ db.mongoose
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
-
-  bodyParser = require('body-parser'),
-
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
-  
-  app.use(function(req, res, next) {
-    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-      jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function(err, decode) {
-        if (err) req.user = undefined;
-        req.user = decode;
-        next();
-      });
-    } else {
-      req.user = undefined;
-      next();
-    }
-  });
-  var routes = require('./routes/user.routes');
-  routes(app);
   
   app.use(function(req, res) {
     res.status(404).send({ url: req.originalUrl + ' not found' })
   });
-  
-
-  
-  module.exports = app;
-//-------------------------------------------------------------------------------
