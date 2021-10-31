@@ -1,0 +1,2 @@
+{"level":"info","message":"::1 - - [28/Oct/2021:16:05:08 +0000] \"GET / HTTP/1.1\" 200 21 \"-\" \"PostmanRuntime/7.28.4\"\n","timestamp":"2021-10-28T16:05:08.408Z"}
+{"level":"info","message":"::1 - - [28/Oct/2021:16:06:00 +0000] \"GET /movie HTTP/1.1\" 500 1378 \"-\" \"PostmanRuntime/7.28.4\"\n","timestamp":"2021-10-28T16:06:00.604Z"}
