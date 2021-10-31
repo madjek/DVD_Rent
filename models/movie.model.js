@@ -4,12 +4,12 @@ module.exports = mongoose => {
       mongoose.Schema(
         {
           title: String,
-          genres: String,
+          genres: Array,
           runtime: Number,
           overview: String,
           original_language: String,
-          production_company: String,
-          production_country: String,
+          production_company: Array,
+          production_country: Array,
           release_date: Date,
           vote_average: Number
         },

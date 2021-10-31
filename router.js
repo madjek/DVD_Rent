@@ -6,8 +6,8 @@ const UserRouter = require('./routes/user.routes');
 const OrderRouter = require('./routes/order.routes');
 
 //Rutas
-router.use('/movie', MovieRouter);
-router.use('/user', UserRouter);
-router.use('/order', OrderRouter);
+router.use('/movies', MovieRouter);
+router.use('/users', UserRouter);
+router.use('/orders', OrderRouter);
 
 module.exports = router;
