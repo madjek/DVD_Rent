@@ -11,9 +11,9 @@ module.exports = mongoose => {
           production_company: Array,
           production_country: Array,
           release_date: Date,
-          vote_average: Number
+          vote_average: Number,
+          available: Boolean
         },
-        { timestamps: true }
       )
     );
   

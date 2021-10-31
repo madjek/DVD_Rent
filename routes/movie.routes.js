@@ -10,7 +10,7 @@ router.get("/available", movies.findAllAvailable); // Retrieve all available mov
 router.get("/:id", movies.findOne); // Retrieve a single movie with id
 router.put("/:id", movies.update); // Update a movie with id
 router.delete("/:id", movies.delete); // Delete a movie with id
-router.delete("/", movies.deleteAll); // Create a new movie
+router.delete("/", movies.deleteAll); // Delete all movies
   
 
 module.exports = router;

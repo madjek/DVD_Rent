@@ -14,11 +14,9 @@ MovieController.create = (req, res) => {
   }
 
   // Create a Movie
-  const movie = new Movie({
-    title: req.body.title,
-    categoryId: req.body.categoryId,
-    available: req.body.available ? req.body.available : false
-  });
+  const movie = new Movie(
+    {title, genres, runtime, overview, original_language, production_company, production_country, release_date, vote_average, available} = req.body,
+  );
 
   // Save Movie in the database
   movie
@@ -71,7 +69,6 @@ MovieController.findOne = (req, res) => {
         .send({ message: "Error retrieving Movie with id=" + id });
     });
 };
-
 
 //-------------------------------------------------------------------------------------
 // Update a Movie by the id in the request
@@ -144,9 +141,9 @@ MovieController.deleteAll = (req, res) => {
 
 
 //-------------------------------------------------------------------------------------
-// Find all published Tutorials
+// Find all availabled movies
 MovieController.findAllAvailable = (req, res) => {
-    Movie.find({ available: true })
+    Movie.find({available: true})
     .then(data => {
       res.send(data);
     })
