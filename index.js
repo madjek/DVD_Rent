@@ -42,39 +42,31 @@ db.mongoose
     process.exit();
   });
 
-  const initial = () => {
-    Role.estimatedDocumentCount((err, count) => {
-      if (!err && count === 0) {
-        new Role({
-          name: "user"
-        }).save(err => {
-          if (err) {
-            console.log("error", err);
-          }
+  bodyParser = require('body-parser'),
+
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
   
-          console.log("added 'user' to roles collection");
-        });
+  app.use(function(req, res, next) {
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
+      jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function(err, decode) {
+        if (err) req.user = undefined;
+        req.user = decode;
+        next();
+      });
+    } else {
+      req.user = undefined;
+      next();
+    }
+  });
+  var routes = require('./routes/user.routes');
+  routes(app);
   
-        new Role({
-          name: "moderator"
-        }).save(err => {
-          if (err) {
-            console.log("error", err);
-          }
+  app.use(function(req, res) {
+    res.status(404).send({ url: req.originalUrl + ' not found' })
+  });
   
-          console.log("added 'moderator' to roles collection");
-        });
+
   
-        new Role({
-          name: "admin"
-        }).save(err => {
-          if (err) {
-            console.log("error", err);
-          }
-  
-          console.log("added 'admin' to roles collection");
-        });
-      }
-    });
-  }
+  module.exports = app;
 //-------------------------------------------------------------------------------

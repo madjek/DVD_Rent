@@ -1,28 +1,35 @@
-module.exports = mongoose => {
-    const User = mongoose.model(
-      "user",
-      mongoose.Schema(
-        {
-          name: {
-            type: String,
-            required: false
-          },
-          email: {
-            type: String,
-            required: true,
-            unique: true,
-          },
-          password: {
-            type: String,
-            required: true,
-            minlength: 6
-          },
-          roles: {
-              type: mongoose.Schema.Types.ObjectId,
-              ref: "role"
-            },
-          tokens:[String]
-        },
-        { timestamps: true }
-      ));
-}
+var mongoose = require('mongoose'),
+  bcrypt = require('bcrypt'),
+  Schema = mongoose.Schema;
+
+/**
+ * User Schema
+ */
+var UserSchema = new Schema({
+  fullName: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  email: {
+    type: String,
+    unique: true,
+    lowercase: true,
+    trim: true,
+    required: true
+  },
+  hash_password: {
+    type: String
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+UserSchema.methods.comparePassword = function(password) {
+  return bcrypt.compareSync(password, this.hash_password);
+};
+
+
+mongoose.model('User', UserSchema);
