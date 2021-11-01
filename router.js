@@ -2,15 +2,14 @@ const router = require('express').Router();
 
 const auth = require('./middleware/auth');
 
-
-//Importamos Routes definidas en views
+//Routes Import
 const MovieRouter = require('./routes/movie.routes');
 const UserRouter = require('./routes/user.routes');
 const OrderRouter = require('./routes/order.routes');
 
-//Rutas
-router.use('/movies',auth, MovieRouter);
-router.use('/users',auth, UserRouter);
-router.use('/orders', OrderRouter);
+//Paths
+router.use('/movies', MovieRouter);
+router.use('/', UserRouter);
+router.use('/orders',auth, OrderRouter);
 
-module.exports = router;
+module.exports = router

@@ -7,8 +7,8 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 
-db.movies = require("./movie.model.js")(mongoose);
-db.orders = require("./order.model.js")(mongoose);
+db.movies = require("./movie.model")(mongoose);
+db.orders = require("./order.model")(mongoose);
 db.users = require("./user.model");
 
 module.exports = db;

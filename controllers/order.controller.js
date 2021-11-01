@@ -4,14 +4,13 @@ const Order = db.orders;
 const OrderController = {}; //Create the object controller
 
 //CRUD end-points Functions
-//-------------------------------------------------------------------------------------
 // Create and Save a new Order
 OrderController.create = (req, res) => {
   // Validate request
-  // if (!req.body.type) {
-  //   res.status(400).send({ message: "Content can not be empty!" });
-  //   return;
-  // }
+  if (!req.body.user_id) {
+    res.status(400).send({ message: "Content can not be empty!" });
+    return;
+  }
 
   // Create a Order
   const order = new Order(
@@ -30,12 +29,8 @@ OrderController.create = (req, res) => {
           err.message || "Some error occurred while creating the Order."
       });
     });
-
-    router.put("/`${this.movie_id}`", movies.update);
 };
 
-
-//-------------------------------------------------------------------------------------
 // Retrieve all orders from the database.
 OrderController.findAll = (req, res) => {
   const type = req.query.type;
@@ -53,8 +48,6 @@ OrderController.findAll = (req, res) => {
     });
 };
 
-
-//-------------------------------------------------------------------------------------
 // Find a single Order with an id
 OrderController.findOne = (req, res) => {
   const id = req.params.id;
@@ -72,8 +65,6 @@ OrderController.findOne = (req, res) => {
     });
 };
 
-
-//-------------------------------------------------------------------------------------
 // Update a Order by the id in the request
 OrderController.update = (req, res) => {
   if (!req.body) {
@@ -99,8 +90,6 @@ OrderController.update = (req, res) => {
     });
 };
 
-
-//-------------------------------------------------------------------------------------
 // Delete a Order with the specified id in the request
 OrderController.delete = (req, res) => {
   const id = req.params.id;
@@ -124,8 +113,6 @@ OrderController.delete = (req, res) => {
     });
 };
 
-
-//-------------------------------------------------------------------------------------
 // Delete all orders from the database.
 OrderController.deleteAll = (req, res) => {
     Order.deleteMany({})
@@ -141,7 +128,5 @@ OrderController.deleteAll = (req, res) => {
       });
     });
 };
-
-
 
 module.exports = OrderController;

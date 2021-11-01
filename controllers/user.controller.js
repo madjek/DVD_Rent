@@ -1,14 +1,26 @@
 const authConfig = require('../config/auth');
 
-var mongoose = require('mongoose'),
-  jwt = require('jsonwebtoken'),
-  bcrypt = require('bcrypt'),
-  User = mongoose.model('User');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+User = mongoose.model('User');
 
-exports.register = function(req, res) {
-  var newUser = new User(req.body);
+const UserController = {}; //Create the object controller
+
+//CRUD end-points Functions
+// Register a new User
+UserController.register = (req, res) => {
+
+  // Validate request
+  if (!req.body.email) {
+    res.status(400).send({ message: "Email can not be empty!" });
+    return;
+  }
   
-  newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
+  const newUser = new User(req.body);
+  
+  newUser.hash_password = bcrypt.hashSync(req.body.password, 8);
+
   newUser.save(function(err, user) {
     if (err) {
       return res.status(400).send({
@@ -21,10 +33,11 @@ exports.register = function(req, res) {
   });
 };
 
-exports.sign_in = function(req, res) {
+// Sign in User
+UserController.sign_in = (req, res) => {
   User.findOne({
     email: req.body.email
-  }, function(err, user) {
+  }, (err, user) => {
     if (err) throw err;
     if (!user || !user.comparePassword(req.body.password)) {
       return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });
@@ -33,20 +46,86 @@ exports.sign_in = function(req, res) {
   });
 };
 
-exports.loginRequired = function(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
+// Retrieve all users from the database.
+UserController.findAll = (req, res) => {
+  const type = req.query.type;
+  var condition = type ? { type: { $regex: new RegExp(type), $options: "i" } } : {};
 
-    return res.status(401).json({ message: 'Unauthorized user!!' });
-  }
+  User.find(condition)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
 };
-exports.profile = function(req, res, next) {
-  if (req.user) {
-    res.send(req.user);
-    next();
-  } 
-  else {
-   return res.status(401).json({ message: 'Invalid token' });
-  }
+
+// Find a single User with an id
+UserController.findOne = (req, res) => {
+  const id = req.params.id;
+
+  User.findById(id)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found User with id " + id });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving User with id=" + id });
+    });
 };
+
+// Update a User by the id in the request
+UserController.update = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Data to update can not be empty!"
+    });
+  }
+
+  const id = req.params.id;
+
+  User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update User with id=${id}. Maybe User was not found!`
+        });
+      } else res.send({ message: "User was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating User with id=" + id
+      });
+    });
+};
+
+// Delete a user with the specified id in the request
+UserController.delete = (req, res) => {
+  const id = req.params.id;
+
+  User.findByIdAndRemove(id, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete user with id=${id}. Maybe user was not found!`
+        });
+      } else {
+        res.send({
+          message: "User was deleted successfully!"
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete user with id=" + id
+      });
+    });
+};
+
+module.exports = UserController;

@@ -1,15 +1,15 @@
-module.exports = function(app) {
-	
-	var userHandlers = require('../controllers/user.controller');
+const express = require('express');
+const router = express.Router();
+const auth = require('../middleware/auth');
 
-	// todoList Routes
-	app.route('/profile')
-		.get(userHandlers.loginRequired, userHandlers.profile);
-
-
-	app.route('/auth/register')
-		.post(userHandlers.register);
-
-	app.route('/auth/sign_in')
-		.post(userHandlers.sign_in);
-};
+//Import Controllers
+const users = require("../controllers/user.controller");
+  
+router.post("/auth/register", users.register); // Register a new user
+router.get("/auth/sign_in", users.sign_in); // Sign in user
+router.get("/auth/:id",auth, users.findOne); // Retrieve user with id
+router.get("/users",auth, users.findAll); // Retrieve all users
+router.put("/auth/:id",auth, users.update); // Update a user with id
+router.delete("/auth/:id",auth, users.delete); // Delete a user with id
+  
+module.exports = router;

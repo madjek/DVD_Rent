@@ -2,13 +2,13 @@ const express = require('express');
 const colors = require('colors');
 const morgan = require('morgan');
 const logger = require('./config/winston');
-const cors = require("cors"); // Import cors module
+const cors = require("cors");
 const db = require("./models");
 const router = require('./router.js');
 
 
 const app = express();
-const PORT = process.env.PORT || 3000; //Configuramos puerto heroku
+const PORT = process.env.PORT || 3000;
 
 //Config Cors Options
 var corsOptions = {
@@ -21,17 +21,14 @@ var corsOptions = {
 //Middleware
 app.use(morgan('combined', { stream: logger.stream }));
 app.use(express.json());
-app.use(cors(corsOptions)); //Add CORS Middleware
+app.use(cors(corsOptions));
 
-//Rutas
+//Paths
 app.get('/', (req, res) => {res.send('Connection to the server successfully');});
 app.use(router);
 
 db.mongoose
-  .connect(db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  .connect(db.url)
   .then(() => {
     console.log("Connected to the database!");
     app.listen(PORT, ()=> console.log(`Server on port ${PORT}`.bgGreen.black));
@@ -40,10 +37,3 @@ db.mongoose
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
-  
-  // app.use(function(req, res) {
-  //   res.status(404).send({ url: req.originalUrl + ' not found' })
-  // });
-
-  var routes = require('./routes/user.routes');
-  routes(app);
