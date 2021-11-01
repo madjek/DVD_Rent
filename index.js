@@ -9,6 +9,7 @@ const router = require('./router.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const uri = process.env.MONGODB_URI;
 
 //Config Cors Options
 var corsOptions = {
