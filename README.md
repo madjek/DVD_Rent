@@ -8,15 +8,15 @@
 GET - https://dvd-rent.herokuapp.com  
 
 #### Movies  
-GET - https://dvd-rent.herokuapp.com/movie  
-GET - https://dvd-rent.herokuapp.com/movie/:id  
-GET - https://dvd-rent.herokuapp.com/movie/:title  
-GET - https://dvd-rent.herokuapp.com/movie/:genre  
-GET - https://dvd-rent.herokuapp.com/movie/available  
-POST - https://dvd-rent.herokuapp.com/movie  
-PUT - https://dvd-rent.herokuapp.com/movie/:id  
-DELETE - https://dvd-rent.herokuapp.com/movie/:id  
-DELETE - https://dvd-rent.herokuapp.com/movie  
+GET - https://dvd-rent.herokuapp.com/movies  
+GET - https://dvd-rent.herokuapp.com/movies/:id  
+GET - https://dvd-rent.herokuapp.com/movies/:title  
+GET - https://dvd-rent.herokuapp.com/movies/:genre  
+GET - https://dvd-rent.herokuapp.com/movies/available  
+POST - https://dvd-rent.herokuapp.com/movies  
+PUT - https://dvd-rent.herokuapp.com/movies/:id  
+DELETE - https://dvd-rent.herokuapp.com/movies/:id  
+DELETE - https://dvd-rent.herokuapp.com/movies  
 
 #### ORDERS
 GET - https://dvd-rent.herokuapp.com/orders  
