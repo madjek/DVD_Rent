@@ -1,3 +1,3 @@
 module.exports = {
-  url: "mongodb://Eugene:1Jekyna2@192.168.1.138:27017/dvd_rent?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
+  url: "mongodb+srv://admin:McMLRN0VcCsRtv4k@dvd-rent.c8mki.mongodb.net/dvd_rent?retryWrites=true&w=majority"
 };
