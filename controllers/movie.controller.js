@@ -4,7 +4,7 @@ const Movie = db.movies;
 const MovieController = {}; //Create the object controller
 
 //CRUD end-points Functions
-//-------------------------------------------------------------------------------------
+
 // Create and Save a new Movie
 MovieController.create = (req, res) => {
   // Validate request
@@ -32,12 +32,10 @@ MovieController.create = (req, res) => {
     });
 };
 
-
-//-------------------------------------------------------------------------------------
 // Retrieve all Movies from the database.
 MovieController.findAll = (req, res) => {
   const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+  let condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
 
   Movie.find(condition)
     .then(data => {
@@ -51,8 +49,6 @@ MovieController.findAll = (req, res) => {
     });
 };
 
-
-//-------------------------------------------------------------------------------------
 // Find a single Movie with an id
 MovieController.findOne = (req, res) => {
   const id = req.params.id;
@@ -70,7 +66,65 @@ MovieController.findOne = (req, res) => {
     });
 };
 
-//-------------------------------------------------------------------------------------
+// Find all availabled movies
+MovieController.findAllAvailable = (req, res) => {
+  Movie.find({available: true})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving Movies."
+    });
+  });
+};
+
+// Find a Movie with a title
+MovieController.findByTitle = (req, res) => {
+const title = req.params.title;
+
+Movie.find({title: title})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .send({ message: "Error retrieving Movie with title=" + title });
+  });
+};
+
+// Find a Movie with a genre
+MovieController.findByGenre = (req, res) => {
+const genre = req.params.genre;
+
+Movie.find({genres: genre})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .send({ message: "Error retrieving Movie with genre=" + genre });
+  });
+};
+
+// Find a Movie by language
+MovieController.findByLang = (req, res) => {
+const lang = req.params.original_language;
+
+Movie.find({original_language: lang})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .send({ message: "Error retrieving Movie with language=" + lang });
+  });
+};
+
 // Update a Movie by the id in the request
 MovieController.update = (req, res) => {
   if (!req.body) {
@@ -96,8 +150,6 @@ MovieController.update = (req, res) => {
     });
 };
 
-
-//-------------------------------------------------------------------------------------
 // Delete a Movie with the specified id in the request
 MovieController.delete = (req, res) => {
   const id = req.params.id;
@@ -121,8 +173,6 @@ MovieController.delete = (req, res) => {
     });
 };
 
-
-//-------------------------------------------------------------------------------------
 // Delete all Movies from the database.
 MovieController.deleteAll = (req, res) => {
     Movie.deleteMany({})
@@ -135,22 +185,6 @@ MovieController.deleteAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while removing all Movies."
-      });
-    });
-};
-
-
-//-------------------------------------------------------------------------------------
-// Find all availabled movies
-MovieController.findAllAvailable = (req, res) => {
-    Movie.find({available: true})
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Movies."
       });
     });
 };
