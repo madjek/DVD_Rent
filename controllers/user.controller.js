@@ -132,4 +132,20 @@ UserController.delete = (req, res) => {
     });
 };
 
+// Delete all USers from the database.
+UserController.deleteAll = (req, res) => {
+  User.deleteMany({})
+  .then(data => {
+    res.send({
+      message: `${data.deletedCount} Users were deleted successfully!`
+    });
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while removing all Users."
+    });
+  });
+};
+
 module.exports = UserController;
