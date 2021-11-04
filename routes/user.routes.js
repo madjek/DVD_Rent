@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 const users = require("../controllers/user.controller");
   
 router.post("/auth/register", users.register); // Register a new user
-router.get("/auth/sign_in", users.sign_in); // Sign in user
+router.post("/auth/sign_in", users.sign_in); // Sign in user
 router.get("/users/:id",auth, users.findOne); // Retrieve user with id
 router.get("/users",auth, users.findAll); // Retrieve all users
 router.put("/users/:id",auth, users.update); // Update a user with id
