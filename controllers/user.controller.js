@@ -39,6 +39,7 @@ UserController.register = (req, res) => {
 
 // Sign in User
 UserController.sign_in = (req, res) => {
+  console.log(req.body)
   User.findOne({
     email: req.body.email
   }, (err, user) => {
