@@ -48,7 +48,7 @@ UserController.sign_in = (req, res) => {
       return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });
     }
     console.log(user)
-    return res.json({user: user, token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id }, authConfig.secret) });
+    return res.json({user: fullName, user: email, token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id }, authConfig.secret) });
   });
 };
 
