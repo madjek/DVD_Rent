@@ -43,7 +43,7 @@ UserController.sign_in = (req, res) => {
   User.findOne({
     email: req.body.email
   }, (err, user) => {
-    if (err) throw err;
+    // if (err) throw err;
     if (!user || !user.comparePassword(req.body.password)) {
       return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });
     }
