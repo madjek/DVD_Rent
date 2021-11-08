@@ -18,6 +18,11 @@ const UserSchema = new Schema({
     lowercase: true,
     required: true
   },
+  phone: {
+    type: String,
+    unique: true,
+    required: true
+  },
   hash_password: {
     type: String
   },
@@ -31,7 +36,7 @@ const UserSchema = new Schema({
     type: Number
   },
   dni: {
-    type: String
+    type: String,
   },
   role: {
     type: String
