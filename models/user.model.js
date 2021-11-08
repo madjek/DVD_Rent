@@ -4,7 +4,11 @@ const mongoose = require('mongoose'),
 
 // User Schema
 const UserSchema = new Schema({
-  fullName: {
+  name: {
+    type: String,
+    required: true
+  },
+  surname: {
     type: String,
     required: true
   },
@@ -15,6 +19,18 @@ const UserSchema = new Schema({
     required: true
   },
   hash_password: {
+    type: String
+  },
+  city: {
+    type: String
+  },
+  address: {
+    type: String
+  },
+  cp: {
+    type: Number
+  },
+  dni: {
     type: String
   },
   created: {
