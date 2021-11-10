@@ -5,7 +5,8 @@ module.exports = mongoose => {
         {
           user_id: String,
           movie_id: String,
-          poster_link: String,
+          title: String,
+          poster_path: String,
           order_date: {
             type: Date,
             default: Date.now
