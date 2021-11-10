@@ -4,7 +4,7 @@ module.exports = mongoose => {
       mongoose.Schema(
         {
           user_id: String,
-          movie_id: String,
+          movie_id: Number,
           order_date: {
             type: Date,
             default: Date.now
