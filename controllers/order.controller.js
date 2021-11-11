@@ -65,6 +65,21 @@ OrderController.findOne = (req, res) => {
     });
 };
 
+// Find a Order with a userId
+MovieController.findByUser = (req, res) => {
+  const userId = req.params.user_id;
+  
+  Movie.find({user_id: userId})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Movie with title=" + userId });
+    });
+  };
+
 // Update a Order by the id in the request
 OrderController.update = (req, res) => {
   if (!req.body) {
