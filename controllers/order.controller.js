@@ -66,10 +66,10 @@ OrderController.findOne = (req, res) => {
 };
 
 // Find a Order with a userId
-MovieController.findByUser = (req, res) => {
+OrderController.findByUser = (req, res) => {
   const userId = req.params.user_id;
   
-  Movie.find({user_id: userId})
+  Order.find({user_id: userId})
     .then(data => {
       res.send(data);
     })
