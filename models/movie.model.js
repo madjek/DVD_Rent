@@ -8,10 +8,10 @@ module.exports = mongoose => {
           runtime: Number,
           overview: String,
           original_language: String,
-          production_company: Array,
-          production_country: Array,
           release_date: Date,
           vote_average: Number,
+          poster_path: String,
+          backdrop_path: String,
           available: Boolean
         },
       )
