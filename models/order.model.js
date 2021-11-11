@@ -3,6 +3,7 @@ module.exports = mongoose => {
       "orders",
       mongoose.Schema(
         {
+          available: Boolean,
           user_id: String,
           movie_id: String,
           title: String,
