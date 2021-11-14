@@ -4,6 +4,7 @@ module.exports = mongoose => {
       mongoose.Schema(
         {
           available: Boolean,
+          fullName: String,
           user_id: String,
           movie_id: String,
           title: String,
