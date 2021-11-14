@@ -4,7 +4,10 @@ module.exports = mongoose => {
       mongoose.Schema(
         {
           available: Boolean,
-          fullName: String,
+          name: String,
+          surname: String,
+          phone: String,
+          email: String,
           user_id: String,
           movie_id: String,
           title: String,
