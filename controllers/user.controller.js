@@ -11,16 +11,12 @@ const UserController = {}; //Create the object controller
 // Register a new User
 UserController.register = (req, res) => {
 
-  let validEmail = (em) => {
-    return UserController.findEmail({email: em});
-  }
-
   // Validate request
   if (!req.body.email) {
     res.status(400).send({ message: "Email can not be empty!" });
     return;
   };
-  if (req.body.email = validEmail(req.body.email)) {
+  if (req.body.email = User.find({email: req.body.email})) {
     res.status(400).send({ message: "Email already exist!" });
   }
   if (req.body.password.length < 8) {
