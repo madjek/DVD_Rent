@@ -16,7 +16,7 @@ UserController.register = (req, res) => {
     res.status(400).send({ message: "Email can not be empty!" });
     return;
   };
-  if (req.body.email = UserController.findEmail({email: email})) {
+  if (req.body.email = UserController.findEmail(email)) {
     res.status(400).send({ message: "Email already exist!" });
   }
   if (req.body.password.length < 8) {
