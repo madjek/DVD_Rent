@@ -84,6 +84,23 @@ UserController.findOne = (req, res) => {
     });
 };
 
+// Find a User by email
+UserController.findEmail = (req, res) => {
+  const email = req.params.email;
+
+  User.find(email)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found User with email " + email });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving User with email=" + email });
+    });
+};
+
 // Update a User by the id in the request
 UserController.update = (req, res) => {
   if (!req.body) {
