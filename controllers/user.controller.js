@@ -16,9 +16,9 @@ UserController.register = (req, res) => {
     res.status(400).send({ message: "Email can not be empty!" });
     return;
   };
-  if (req.body.email = User.find({email: req.body.email})) {
-    res.status(400).send({ message: "Email already exist!" });
-  }
+  // if (req.body.email = User.find({email: req.body.email})) {
+  //   res.status(400).send({ message: "Email already exist!" });
+  // }
   if (req.body.password.length < 8) {
     res.status(400).send({ message: "Password should be at least 8 characters long." });
     return;
