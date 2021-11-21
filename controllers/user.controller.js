@@ -11,8 +11,8 @@ const UserController = {}; //Create the object controller
 // Register a new User
 UserController.register = (req, res) => {
 
-  let validEmail = (email) => {
-    return UserController.findOne({email: email});
+  let validEmail = (em) => {
+    return UserController.findEmail({email: em});
   }
 
   // Validate request
