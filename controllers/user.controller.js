@@ -19,10 +19,10 @@ UserController.register = (req, res) => {
   // if (req.body.email = User.find({email: req.body.email})) {
   //   res.status(400).send({ message: "Email already exist!" });
   // }
-  if (req.body.password.length < 8) {
-    res.status(400).send({ message: "Password should be at least 8 characters long." });
-    return;
-  };
+  // if (req.body.password.length < 8) {
+  //   res.status(400).send({ message: "Password should be at least 8 characters long." });
+  //   return;
+  // };
   
   const newUser = new User(req.body);
   
