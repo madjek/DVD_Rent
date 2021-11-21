@@ -88,7 +88,7 @@ UserController.findOne = (req, res) => {
 UserController.findEmail = (req, res) => {
   const email = req.params.email;
 
-  User.find(email)
+  User.find({email: email})
     .then(data => {
       if (!data)
         res.status(404).send({ message: "Not found User with email " + email });
