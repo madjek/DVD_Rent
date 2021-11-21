@@ -18,7 +18,8 @@ UserController.register = (req, res) => {
   };
   if (req.body.email = User.find({email: email})) {
     res.status(400).send({ message: "Email already exist!" });
-  }
+    return;
+  };
   if (req.body.password.length < 8) {
     res.status(400).send({ message: "Password should be at least 8 characters long." });
     return;
